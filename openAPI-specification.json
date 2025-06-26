@@ -5,7 +5,7 @@
     "description": "API for semantic search and date-based search of invoices using Elasticsearch",
     "version": "1.0.0"
   },
-  "host": "9a9e-2405-201-e007-4814-41d6-efe2-96dc-533b.ngrok-free.app",
+  "host": "example_endpoint.ngrok-free.app", 
   "basePath": "/",
   "schemes": ["https"],
   "consumes": ["application/json"],

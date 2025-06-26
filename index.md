@@ -69,7 +69,7 @@ You can **Download** and **Deploy** it:
 Once the ML model was ready, I created an index called `invoices` and added appropriate mappings, including the semantic-enabled field. Here's where I define fields like `description`, `total_amount`, `issue_date`, and the `semantic_text` field powered by our ML model. If you face any timeouts or ML-related errors at this point, try again after a few minutes—it's likely the model is still in the deploying state. It typically takes under 5 minutes for it to become fully available.
 
 ```json
-# Example Document:
+// Example Document:
 {
     "id": "INV-0004",
     "file_url": "https://fake-invoices.example.com/fake/INV-0004.pdf",
@@ -254,6 +254,13 @@ This is where it all comes together. In **Microsoft Copilot Studio** - https://c
 #### Step 6: Add Tools (Our API) to the Agent *(formerly called Actions)*
 
 In the Agent, I went to **Tools** and added a new `REST API` by uploading our ready `OpenAPI specifications` for `semantic search` and `search by date`. This file includes both our endpoints, and I updated the `host` field to match my `ngrok` tunnel (minus the `https://`).
+
+```json
+// In openAPI-specification.json
+"host": "example_endpoint.ngrok-free.app", 
+
+Replace "example_endpoint.ngrok-free.app" with the ngrok public url
+```
 
 Don’t forget to handle the `ngrok-skip-browser-warning` header if you're using the free tier of ngrok. It trips up Copilot unless you bypass it. By default, Copilot assumes it can dynamically query this value, but you’ll want to change it to a `custom value` and set it to `1`. Do this for both the REST API connectors before attaching them to the Agent.
 
