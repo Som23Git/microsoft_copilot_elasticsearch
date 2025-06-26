@@ -1,4 +1,6 @@
-### From Elasticsearch to Microsoft Copilot Studio: Building Smart LLM Agents for Invoice Search
+### Building Smart LLM Agents with Elasticsearch and Microsoft Copilot Studio
+
+![high_level_architecture_diagram](./assets/high_level_architecture_diagram.png)
 
 If you've ever thought about combining the power of `Elasticsearch` with the conversational capabilities of `Microsoft Copilot`, you're in the right place. I recently explored this integration end-to-end using invoices as a sample dataset to make it easy for `FinOps` stakeholders. But don’t let that limit your imagination, this approach makes even more sense for `DevOps teams` or any domain where querying services and infrastructure through natural language could boost productivity. Here's how I pulled it off.
 
@@ -66,10 +68,11 @@ You can **Download** and **Deploy** it:
 ---
 
 #### Step 3: Create the `invoices` Index with Mappings
-Once the ML model was ready, I created an index called `invoices` and added appropriate mappings, including the semantic-enabled field. Here's where I define fields like `description`, `total_amount`, `issue_date`, and the `semantic_text` field powered by our ML model. If you face any timeouts or ML-related errors at this point, try again after a few minutes—it's likely the model is still in the deploying state. It typically takes under 5 minutes for it to become fully available.
+Once the ML model was ready, I created an index called `invoices` and added appropriate mappings, including the semantic-enabled field. Here's where I define fields like `description`, `total_amount`, `issue_date`, and the `semantic_text` field powered by our ML model. If you face any timeouts or ML-related errors at this point, try again after a few minutes, it's likely the model is still in the deploying state. It typically takes under 5 minutes for it to become fully available.
 
+##### Example Document:
 ```json
-// Example Document:
+
 {
     "id": "INV-0004",
     "file_url": "https://fake-invoices.example.com/fake/INV-0004.pdf",
@@ -255,13 +258,6 @@ This is where it all comes together. In **Microsoft Copilot Studio** - https://c
 
 In the Agent, I went to **Tools** and added a new `REST API` by uploading our ready `OpenAPI specifications` for `semantic search` and `search by date`. This file includes both our endpoints, and I updated the `host` field to match my `ngrok` tunnel (minus the `https://`).
 
-```json
-// In openAPI-specification.json
-"host": "example_endpoint.ngrok-free.app", 
-
-Replace "example_endpoint.ngrok-free.app" with the ngrok public url
-```
-
 Don’t forget to handle the `ngrok-skip-browser-warning` header if you're using the free tier of ngrok. It trips up Copilot unless you bypass it. By default, Copilot assumes it can dynamically query this value, but you’ll want to change it to a `custom value` and set it to `1`. Do this for both the REST API connectors before attaching them to the Agent.
 
 ![add_a_new_tool](./assets/add_a_new_tool.png)
@@ -290,10 +286,16 @@ You can extend this to `Channels` and include it to `Teams` and `Copilot Chat`.
 ---
 
 #### Final Thoughts
-This entire process feels like giving Elasticsearch a voice. You build the brains with Elastic ML and fast APIs, and Copilot brings the conversation. If you're working with company data and want to surface it more intuitively inside Teams or the Microsoft 365 ecosystem, this is a powerful pattern to try.
+This entire process feels like giving `Elasticsearch` a voice. You build the brains with `Elastic Elser v2` built-in Sparse Vector Model and fast APIs, and `Copilot` brings the conversation. If you're working with company data and want to surface it more intuitively inside Teams or the Microsoft 365 ecosystem, this is a powerful pattern to try.
 
 I'm attaching the GitHub repo along with the Jupyter notebook (`.ipynb`), the OpenAPI specifications, and a sample `invoices.json` payload for reference. This includes everything you need to ingest documents into Elasticsearch and try it out end-to-end.
 
 Give it a try and let me know your feedback! In the next article, we'll dive into `MCP (Model Context Protocol)`, since what we've done here acts as a precursor to setting up a proper MCP Server.
 
 **Credits:** Inspired by [Elastic's guide on enhancing Microsoft Copilot with Elasticsearch](https://www.elastic.co/search-labs/blog/improve-microsoft-copilot-with-elasticsearch).
+
+---
+#### License
+This project is licensed under the **MIT License**.
+
+---
