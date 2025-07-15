@@ -1,5 +1,10 @@
 ### Building Smart LLM Agents with Elasticsearch and Microsoft Copilot Studio
 
+![elasticsearch_microsoft_copilot_fastapi](elasticsearch_fastapi_copilot.png)
+
+----
+## Architecture Diagram
+
 ![high_level_architecture_diagram](./assets/high_level_architecture_diagram.png)
 
 If you've ever thought about combining the power of `Elasticsearch` with the conversational capabilities of `Microsoft Copilot`, you're in the right place. I recently explored this integration end-to-end using invoices as a sample dataset to make it easy for `FinOps` stakeholders. But don’t let that limit your imagination, this approach makes even more sense for `DevOps teams` or any domain where querying services and infrastructure through natural language could boost productivity. Here's how I pulled it off.
